@@ -9,19 +9,26 @@ Eclipse/PyDev/PyUnit.
 
 Fixes/changes:
 
--> added: __str__ for automata.tm.tape.TMTape.
--> changed: __eq__ for automata.tm.tape.TMTape.
--> added: automata.UseCases
--> added: automata.tests
+- added: __str__ for automata.tm.tape.TMTape.
+- changed: __eq__ for automata.tm.tape.TMTape.
+- added: automata.UseCases
+- added: automata.tests
  
-Original see: 
-- https://github.com/caleb531/automata
-- https://pypi.python.org/pypi/automata-lib
-
 * Arno-Can Uestuensoez - https://arnocan.wordpress.com
+
 
 #--------------------------
 # Original:
+# =========
+#
+#   For Copyright, Licenses etc. refer to following 
+#   copy of the original.
+#
+# Original see: 
+#  - https://github.com/caleb531/automata
+#  - https://pypi.python.org/pypi/automata-lib
+#
+#
 #--------------------------
 
 # Automata
