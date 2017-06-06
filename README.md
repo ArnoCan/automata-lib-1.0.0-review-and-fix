@@ -9,8 +9,8 @@ Eclipse/PyDev/PyUnit.
 
 Fixes/changes:
 
-- added: __str__ for automata.tm.tape.TMTape - supported by PyDev.
-- changed: __eq__ for automata.tm.tape.TMTape.
+- added: \_\_str\_\_ for automata.tm.tape.TMTape - supported by PyDev.
+- changed: \_\_eq\_\_ for automata.tm.tape.TMTape.
 - added: automata.UseCases
 - added: automata.tests
  
