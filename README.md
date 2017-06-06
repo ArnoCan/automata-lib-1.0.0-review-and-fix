@@ -18,17 +18,15 @@ Fixes/changes:
 
 
 #--------------------------
-# Original:
-# =========
-#
-#   For Copyright, Licenses etc. refer to following 
-#   copy of the original.
-#
-# Original see: 
-#  - https://github.com/caleb531/automata
-#  - https://pypi.python.org/pypi/automata-lib
-#
-#
+
+Original:
+For Copyright, Licenses etc. refer to following 
+copy of the original.
+
+Original see: 
+- https://github.com/caleb531/automata
+- https://pypi.python.org/pypi/automata-lib
+
 #--------------------------
 
 # Automata
