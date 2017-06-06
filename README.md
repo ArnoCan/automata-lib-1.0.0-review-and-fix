@@ -1,25 +1,29 @@
 #--------------------------
 # Automata-acue
 
-This is a review and bugfix release as part of a study for common 
-extendable framework for Chomsky types.
+This is a review and bugfix release as part of a study for a common 
+extendable framework of Chomsky types.
 
 Therefore some UseCases and tests are added as UnitTests for
 Eclipse/PyDev/PyUnit. 
 
 Fixes/changes:
 
-- added: __str__ for automata.tm.tape.TMTape.
+- added: __str__ for automata.tm.tape.TMTape - supported by PyDev.
 - changed: __eq__ for automata.tm.tape.TMTape.
 - added: automata.UseCases
 - added: automata.tests
  
 * Arno-Can Uestuensoez - https://arnocan.wordpress.com
 
+The fixes are checked in into this repo, but there is no intention 
+to continue the work on this package after analysing the code. For 
+the current version refer to the original as referenced following.
 
 #--------------------------
 
-Original:
+**Original**:
+
 For Copyright, Licenses etc. refer to following 
 copy of the original.
 
