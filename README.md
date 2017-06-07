@@ -526,7 +526,7 @@ any input has been read) and the last yielded state is always the DTM's final
 state (after all input has been read). If the string is rejected by the DTM, the
 method still raises a `RejectionError`.
 
-The following includes the state-recognition for *__eq__*, *__str__*, *__repr__*.
+The following includes the state-recognition for *\_\_eq\_\_*, *\_\_str\_\_*, *\_\_repr\_\_*.
 
 ```python
 [(state, TMTapeWithState(tape) for state, tape in dtm.validate_input('01', step=True)]
