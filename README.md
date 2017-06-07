@@ -30,10 +30,8 @@ the current version refer to the original as referenced following.
 
 **Original**:
 
-For Copyright, Licenses etc. refer to following
-copy of the original.
+For Copyright, Licenses etc. refer to original:
 
-Original see:
 - https://github.com/caleb531/automata
 - https://pypi.python.org/pypi/automata-lib
 
@@ -41,9 +39,10 @@ Original see:
 
 # Automata - with minor fixes/patches
 
-*Copyright 2016 Caleb Evans*
-*Copyright 2017 Arno-Can Uestuensoez*
-*Released under the MIT license*
+Original: *Copyright 2016 Caleb Evans* - *Released under the MIT license*
+
+Patches: *Copyright 2017 Arno-Can Uestuensoez* - *Released under the MIT license*
+
 
 [![Build Status](https://travis-ci.org/caleb531/automata.svg?branch=master)](https://travis-ci.org/caleb531/automata)
 [![Coverage Status](https://coveralls.io/repos/caleb531/automata/badge.svg?branch=master)](https://coveralls.io/r/caleb531/automata?branch=master)
