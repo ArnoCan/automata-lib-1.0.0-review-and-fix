@@ -3,7 +3,10 @@
 
 
 class TMTape(object):
-    """A Turing machine tape."""
+    """A Turing machine tape.
+
+    Mainly single-tape view of Turing machines.
+    """
 
     def __init__(self, tape, **kwargs):
         """Initialize the new Turing machine tape."""
@@ -12,7 +15,8 @@ class TMTape(object):
         else:
             self._init_from_tape_params(tape, **kwargs)
 
-    def _init_from_tape_params(self, tape, *, blank_symbol, current_position=0,
+#FIXME:    def _init_from_tape_params(self, tape, *, blank_symbol, current_position=0,
+    def _init_from_tape_params(self, tape, *, blank_symbol='', current_position=0,
                                position_offset=0):
         """Initialize a TM tape from the defined tape parameters."""
         self.tape = list(tape)
@@ -65,10 +69,81 @@ class TMTape(object):
         """Return an interator for the tape."""
         return iter(self.tape)
 
+    def __str__(self):
+        """Return a string representation of the tape."""
+        res = ""
+        res += "\ntape =" +str(self.tape)
+        res += "\nblank_symbol = '"+str(self.blank_symbol)+"' "
+        res += "\n"
+        return res
+
     def __repr__(self):
         """Return a string representation of the tape."""
-        return '{}(\'{}\')'.format(self.__class__.__name__, ''.join(self.tape))
+        res = "{"
+        res += "'tape': '"+str(self.tape)+"',"
+        res += "'blank_symbol': '"+str(self.blank_symbol)+"',"
+        res += "}"
+        return res
 
     def __eq__(self, other):
-        """Check if two tapes are equal."""
+        """Check if two tapes are equal.
+
+        Equal means: content AND blank_symbol
+
+        """
+#FIXME:
+        return self.tape == other.tape and self.blank_symbol == other.blank_symbol
+
+class TMTapeWithState(TMTape):
+    """A Turing machine tape including processing positions.
+
+    Multiple-tape Turing machines.
+    """
+
+    def __init__(self, tape, **kwargs):
+        """Initialize the new Turing machine tape."""
+        if isinstance(tape, TMTapeWithState):
+            self.__init__(
+                tape=tape.tape, blank_symbol=tape.blank_symbol,
+                current_position=tape.current_position,
+                position_offset=tape.position_offset)
+
+            self._init_from_tape_obj(tape)
+        else:
+            super(TMTapeWithState,self).__init__(tape, **kwargs)
+
+    def __eq__(self, other):
+        """Check if two tapes are equal.
+
+        Equal means: content, blank_symbol, processing positions
+
+        The dictionaries contain:
+
+            self.tape
+            self.blank_symbol
+            self.current_position
+            self.position_offset
+
+        """
         return self.__dict__ == other.__dict__
+
+    def __str__(self):
+        """Return a string representation of the tape."""
+        res = ""
+        res += "\ntape =" +str(self.tape)
+        res += "\nblank_symbol = '"+str(self.blank_symbol)+"' "
+        res += "\ncurrent_position = "+str(self.current_position)
+        res += "\nposition_offset = "+str(self.position_offset)
+        res += "\n"
+        return res
+
+    def __repr__(self):
+        """Return a string representation of the tape."""
+        res = "{"
+        res += "'tape': '"+str(self.tape)+"',"
+        res += "'blank_symbol': '"+str(self.blank_symbol)+"',"
+        res += "'current_position': "+str(self.current_position)+","
+        res += "'position_offset': "+str(self.position_offset)+","
+        res += "}"
+        return res
+

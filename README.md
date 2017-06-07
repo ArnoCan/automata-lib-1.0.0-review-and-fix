@@ -1,41 +1,48 @@
 #--------------------------
 # Automata-acue
 
-This is a review and bugfix release as part of a study for a common 
+This is a review and bugfix release as part of a study for a common
 extendable framework of Chomsky types.
 
 Therefore some UseCases and tests are added as UnitTests for
-Eclipse/PyDev/PyUnit. 
+Eclipse/PyDev/PyUnit.
 
 Fixes/changes:
 
-- added: \_\_str\_\_ for automata.tm.tape.TMTape - supported by PyDev.
+- added: \_\_str\_\_ for automata.tm.tape.TMTape - supported by Hover of PyDev.
 - changed: \_\_eq\_\_ for automata.tm.tape.TMTape.
+- added: initialization of *blank_symbol* for
+  automata.tm.tape.TMTape._init_from_tape_params.
 - added: automata.UseCases
 - added: automata.tests
- 
+- added: automata.tm.tape.TMTapeWithState
+  This manages the \_\_eq\_\_ operator:
+  - TMTape.\_\_eq\_\_: content only -> content, blank_symbol
+  - TMTapeWithState.\_\_eq\_\_: additional position
+
 * Arno-Can Uestuensoez - https://arnocan.wordpress.com
 
-The fixes are checked in into this repo, but there is no intention 
-to continue the work on this package after analysing the code. For 
+The fixes are checked in into this repo, but there is no intention
+to continue the work on this package after analysing the code. For
 the current version refer to the original as referenced following.
 
 #--------------------------
 
 **Original**:
 
-For Copyright, Licenses etc. refer to following 
+For Copyright, Licenses etc. refer to following
 copy of the original.
 
-Original see: 
+Original see:
 - https://github.com/caleb531/automata
 - https://pypi.python.org/pypi/automata-lib
 
 #--------------------------
 
-# Automata
+# Automata - with minor fixes/patches
 
-*Copyright 2016 Caleb Evans*  
+*Copyright 2016 Caleb Evans*
+*Copyright 2017 Arno-Can Uestuensoez*
 *Released under the MIT license*
 
 [![Build Status](https://travis-ci.org/caleb531/automata.svg?branch=master)](https://travis-ci.org/caleb531/automata)
@@ -423,6 +430,20 @@ for this DTM
 All of these properties must be supplied when the DTM is instantiated (see the
 examples below).
 
+The tape comprises the following attributes:
+
+- tape: content
+- blank_symbol: "empty" field
+- current_position: head position
+- position_offset: offset
+
+In case of required comparison operation *__eq__* two classes are provided.
+This is required e.g. for Unit tests, when a reference class with static content
+has to be checked only.
+
+- TMTape: content only
+- TMTapeWithState: content and operational state, positions.
+
 ```python
 from automata.tm.dtm import DTM
 # DTM which matches all strings beginning with '0's, and followed by
@@ -485,13 +506,15 @@ the current tape as a `TMTape` object.
 ```python
 [(state, tape.copy()) for state, tape in dtm.validate_input('01', step=True)]
 # returns [
-#   ('q0', TMTape('01'))
-#   ('q1', TMTape('x1'))
-#   ('q2', TMTape('xy'))
-#   ('q0', TMTape('xy'))
-#   ('q3', TMTape('xy'))
-#   ('q3', TMTape('xy.'))
+#   ('q0', TMTape('01',blank_symbol=BS))
+#   ('q1', TMTape('x1',blank_symbol=BS))
+#   ('q2', TMTape('xy',blank_symbol=BS))
+#   ('q0', TMTape('xy',blank_symbol=BS))
+#   ('q3', TMTape('xy',blank_symbol=BS))
+#   ('q3', TMTape('xy.',blank_symbol=BS))
 # ]
+# Where BS is the blank symbol, default:=''.
+#
 ```
 
 Please note that each tuple contains a reference to (not a copy of) the current
@@ -503,6 +526,32 @@ Also note that the first yielded state is always the DTM's initial state (before
 any input has been read) and the last yielded state is always the DTM's final
 state (after all input has been read). If the string is rejected by the DTM, the
 method still raises a `RejectionError`.
+
+The following includes the state-recognition for *__eq__*, *__str__*, *__repr__*.
+
+```python
+[(state, TMTapeWithState(tape) for state, tape in dtm.validate_input('01', step=True)]
+# returns [
+#   ('q0', TMTapeWithState('01',blank_symbol=BS,current_position=CP,position_offset=PO))
+#   ('q1', TMTapeWithState('x1',blank_symbol=BS,current_position=CP,position_offset=PO))
+#   ('q2', TMTapeWithState('xy',blank_symbol=BS,current_position=CP,position_offset=PO))
+#   ('q0', TMTapeWithState('xy',blank_symbol=BS,current_position=CP,position_offset=PO))
+#   ('q3', TMTapeWithState('xy',blank_symbol=BS,current_position=CP,position_offset=PO))
+#   ('q3', TMTapeWithState('xy.',blank_symbol=BS,current_position=CP,position_offset=PO))
+# ]
+#
+# Where the values from *TMTape* are pushed:
+# - 'tape', tape.tape
+# - BS is the blank symbol, tape.blank_symbol
+# - CP is the current position, tape.current_position
+# - PO is the position offset, tape.position_offset
+#
+# When set explicit:
+# - BS is the blank symbol, default:=''.
+# - CP is the current position, default:=0.
+# - PO is the position offset, default:=0.
+#
+```
 
 #### DTM.validate_self(self)
 

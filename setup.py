@@ -15,13 +15,12 @@ def get_long_description():
 
 
 setup(
-    name='automata-lib',
-    version='1.0.0r3',
-    description='A Python library for simulating automata and Turing machines',
+    name='automata-lib-1.0.0-review-and-fix',
+    version='1.0.0acue',
+    description='Patches foraA Python library for simulating automata and Turing machines',
     long_description=get_long_description(),
-    url='https://github.com/caleb531/automata',
-    author='Caleb Evans',
-    author_email='caleb@calebevans.me',
+    url='https://github.com/ArnoCan/automata-lib-1.0.0-review-and-fix',
+    author='Arno-Can Uestuensoez',
     license='MIT',
     keywords='automata turing machine',
     packages=[
